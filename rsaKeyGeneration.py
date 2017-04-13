@@ -24,7 +24,7 @@ def generateKey(keySize):
 def makeKeyFiles(name, keySize):
     if os.path.exists('%s_pubkey.txt' % (name)) or os.path.exists('%s_privkey.txt' % (name)):
         # sys.exit('WARNING: The file %s_pubkey.txt or %s_privkey.txt already exists! Use a different name or delete these files and re-run this program.' % (name, name))
-        return('WARNING: The file %s_pubkey.txt or %s_privkey.txt already exists! Use a different name or delete these files and re-run this program.' % (name, name))
+        return('WARNING: The file %s_pubkey.txt or %s_privkey.txt already exists! \nUse a different name or delete these files and re-run this program.' % (name, name))
     else:
         publicKey, privateKey = generateKey(keySize)
         print()
