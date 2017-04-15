@@ -62,8 +62,8 @@ def decryption_window():
     Button(df1, text="Browse", command=lambda: open_file(entry6)).grid(row=2, column=27, sticky='ew', padx=8, pady=4)
     Button(df1, text="Browse", command=lambda: open_file(entry8)).grid(row=3, column=27, sticky='ew', padx=8, pady=4)
     Button(df1, text="FlowDiag", command=lambda: create_window(df1,"img2.png","img4.png")).place(relx=0.8, rely=0.2)
-    Button(df1, text="Decrypt", command=encrypt).grid(row=4, column=0, sticky='we', padx=8, pady=4)
-    Button(df1, text="Back", command=close_encryption_window).grid(row=4, column=2, sticky='we', padx=8, pady=4)
+    Button(df1, text="Decrypt", command=decrypt).grid(row=4, column=0, sticky='we', padx=8, pady=4)
+    Button(df1, text="Back", command=close_decryption_window).grid(row=4, column=2, sticky='we', padx=8, pady=4)
 
 def create_window(f,i1,i2):
     window = Toplevel(f)
