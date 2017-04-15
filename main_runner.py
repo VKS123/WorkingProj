@@ -359,10 +359,9 @@ def main():
 
     f2 = Frame(mf, width=300, height=150)
     f2.pack()
-
     Button(f2, text="Generate Keys", command=generate_keys_window).grid(row=0, column=27, sticky='ew', padx=38, pady=24)
-    Button(f2, text="Encryptiom", command=encryption_window).grid(row=0, column=54, sticky='ew', padx=38, pady=24)
-    Button(f2, text="Decryption", command=decryption_window).grid(row=0, column=81, sticky='ew', padx=38, pady=24)
+    Button(f2, text="Encryption", command=encryption_window).grid(row=0, column=54, sticky='ew', padx=38, pady=24)
+    Button(f2, text="Decryption", command=decryption_window).grid(row=0, column=81, sticky='ew', padx=38, pady=24)]
 
     root.mainloop()
 main()
