@@ -1,4 +1,6 @@
 import os
+import PIL.Image
+import PIL.ImageTk
 from tkFileDialog import askopenfilename
 from Tkinter import *
 from rsaKeyGeneration import *
@@ -25,7 +27,7 @@ def decryption_window():
     global entry6
     global entry8
     global l3,l8,l9
-    global df3
+    global df3,df1
     decrptwindow = Tk()
     decrptwindow.title('')
     decrptwindow.geometry()
@@ -33,14 +35,14 @@ def decryption_window():
     df.pack()
     df1 = Frame(df, width=300, height=150)
     df1.pack(fill=X)
-    df2 = Frame(df, width=300, height=150)
-    df2.pack()
-    f3 = Frame(df, highlightbackground="green", highlightcolor="green", highlightthickness=3, width=1000, height=400)
-    f3.pack()
-    l2 = Label(f3, text="Keys generation")
-    l2.place(relx=0.5, rely=0.4, anchor=CENTER)
-    l3 = Label(f3, text="FLOW CHART")
-    l3.place(relx=0.5, rely=0.5, anchor=CENTER)
+    # df2 = Frame(df, width=300, height=150)
+    # df2.pack()
+    df3 = Frame(df, highlightbackground="green", highlightcolor="green", highlightthickness=3, width=1000, height=1000)
+    df3.pack()
+    l8 = Label(df3, text="DECRYPTION")
+    l8.place(relx=0.5, rely=0.4, anchor=CENTER)
+    l9 = Label(df3, text="FLOW CHART")
+    l9.place(relx=0.5, rely=0.5, anchor=CENTER)
     Label(df1, text="Select your Private key File").grid(row=0, column=0, sticky='e')
     Label(df1, text="Select Reciever Public key File").grid(row=1, column=0, sticky='e')
     Label(df1, text="Select R num File").grid(row=2, column=0, sticky='e')
@@ -59,9 +61,24 @@ def decryption_window():
     Button(df1, text="Browse", command=lambda: open_file(entry5)).grid(row=1, column=27, sticky='ew', padx=8, pady=4)
     Button(df1, text="Browse", command=lambda: open_file(entry6)).grid(row=2, column=27, sticky='ew', padx=8, pady=4)
     Button(df1, text="Browse", command=lambda: open_file(entry8)).grid(row=3, column=27, sticky='ew', padx=8, pady=4)
+    Button(df1, text="FlowDiag", command=lambda: create_window(df1,"img2.png","img4.png")).place(relx=0.8, rely=0.2)
+    Button(df1, text="Decrypt", command=encrypt).grid(row=4, column=0, sticky='we', padx=8, pady=4)
+    Button(df1, text="Back", command=close_encryption_window).grid(row=4, column=2, sticky='we', padx=8, pady=4)
 
-    Button(df2, text="Decrypt", width=32, command=decrypt).grid(row=0, column=27, sticky='ew', padx=8, pady=4)
-    Button(df2, text="Back", width=32, command=close_decryption_window).grid(row=0, column=54, sticky='ew', padx=8, pady=4)
+def create_window(f,i1,i2):
+    window = Toplevel(f)
+    logo_filepath = i1
+    img = PhotoImage(file=logo_filepath)
+    img = img.subsample(1)
+    logo = Label(window, image=img)
+    logo.photo = img
+    logo.grid(row=50, column=0, rowspan=550, columnspan=250)
+    logo_filepath1 = i2
+    img1 = PhotoImage(file=logo_filepath1)
+    img1 = img1.subsample(4,5)
+    logo1 = Label(window, image=img1)
+    logo1.photo = img1
+    logo1.grid(row=0, column=262, rowspan=550, columnspan=250)
 
 def encryption_window():
     close_main()
@@ -71,7 +88,7 @@ def encryption_window():
     global entry3
     global entry7
     global l2,l6,l7
-    global ef3
+    global ef1,ef3
     encrptwindow = Tk()
     encrptwindow.title('')
     encrptwindow.geometry()
@@ -79,9 +96,9 @@ def encryption_window():
     ef.pack()
     ef1 = Frame(ef, width=300, height=150)
     ef1.pack(fill=X)
-    ef2 = Frame(ef, width=300, height=150)
-    ef2.pack()
-    ef3 = Frame(ef, highlightbackground="green", highlightcolor="green", highlightthickness=3, width=1000, height=400)
+    # ef2 = Frame(ef, width=300, height=150)
+    # ef2.pack()
+    ef3 = Frame(ef, highlightbackground="green", highlightcolor="green", highlightthickness=3, width=1000, height=1000)
     ef3.pack()
     l6 = Label(ef3, text="  ENCRYPTION    ")
     l6.place(relx=0.5, rely=0.4, anchor=CENTER)
@@ -105,8 +122,10 @@ def encryption_window():
     Button(ef1, text="Browse", command=lambda: open_file(entry2)).grid(row=1, column=27, sticky='ew', padx=8, pady=4)
     Button(ef1, text="Browse", command=lambda: open_file(entry3)).grid(row=2, column=27, sticky='ew', padx=8, pady=4)
     Button(ef1, text="Browse", command=lambda: open_file(entry7)).grid(row=3, column=27, sticky='ew', padx=8, pady=4)
-    Button(ef2, text="Encrypt", width=32, command=encrypt).grid(row=0, column=27, sticky='ew', padx=8, pady=4)
-    Button(ef2, text="Back", width=32, command=close_encryption_window).grid(row=0, column=54, sticky='ew', padx=8, pady=4)
+
+    Button(ef1, text="FlowDiag", command=lambda: create_window(ef1,"img2.png","img3.png")).place(relx=0.8,rely=0.2)
+    Button(ef1, text="Encrypt", command=encrypt).grid(row=4, column=0, sticky='we', padx=8, pady=4)
+    Button(ef1, text="Back",  command=close_encryption_window).grid(row=4, column=2, sticky='we', padx=8, pady=4)
 
 
 def generate_keys_window():
@@ -123,9 +142,9 @@ def generate_keys_window():
     kf.pack()
     f1 = Frame(kf, width=300, height=150)
     f1.pack(fill=X)
-    f2 = Frame(kf, width=300, height=150)
-    f2.pack()
-    f3 = Frame(kf, highlightbackground="green", highlightcolor="green", highlightthickness=3,width=1000, height=400)
+    # f2 = Frame(kf, width=300, height=150)
+    # f2.pack()
+    f3 = Frame(kf, highlightbackground="green", highlightcolor="green", highlightthickness=3,width=1000, height=1000)
     f3.pack()
     l4=Label(f3, text="Keys generation")
     l4.place(relx=0.5, rely=0.4, anchor=CENTER)
@@ -139,8 +158,15 @@ def generate_keys_window():
     e1.grid(row=1, column=1, padx=2, pady=2, sticky='we', columnspan=25)
     e2 = Entry(f1, width=50)
     e2.grid(row=2, column=1, padx=2, pady=2, sticky='we', columnspan=25)
-    Button(f2, text="Generate", width=32, command=generate_keys).grid(row=0, column=27, sticky='ew', padx=8, pady=4)
-    Button(f2, text="Back", width=32, command=close_generate_keys_window).grid(row=0, column=54, sticky='ew', padx=8, pady=4)
+
+    # logo_filepath = "img1.png"
+    # img = PhotoImage(file=logo_filepath)
+    # img = img.subsample(2,2)
+    # logo = Label(f2, image=img)
+    # logo.photo = img
+    # logo.grid(row=0, column=0, rowspan=550, columnspan=250)
+    Button(f1, text="Generate", width=12, command=generate_keys).grid(row=4, column=0, sticky='we', padx=8, pady=4)
+    Button(f1, text="Back", width=12, command=close_generate_keys_window).grid(row=4, column=1, sticky='we', padx=8, pady=4)
 
 
 def encrypt():
@@ -188,9 +214,9 @@ def encrypt():
         l6.destroy()
         l7.destroy()
         for i in range(len(content)):
-            encrptwindow.after(i * 2000, flowchart, ef3,content[i].center(50), i, 0.3)
+            encrptwindow.after(i * 500, flowchart, ef3,content[i].center(50), i, 0.3)
         for i in range(len(example)):
-            encrptwindow.after(i * 2000, flowchart, ef3,example[i].center(50), i, 0.7)
+            encrptwindow.after(i * 500, flowchart, ef3,example[i].center(50), i, 0.7)
         # print entry1.get()
         # print entry2.get()
         # print entry3.get()
@@ -246,12 +272,12 @@ def decrypt():
     if len(entry4.get())==0 or len(entry5.get())==0 or len(entry6.get())==0 or len(entry8.get())==0:
         l3.config(text="Please Provide Inputs")
     else:
-        l6.destroy()
-        l7.destroy()
+        l8.destroy()
+        l9.destroy()
         for i in range(len(content)):
-            decrptwindow.after(i * 2000, flowchart, df3,content[i].center(50), i, 0.3)
+            decrptwindow.after(i * 500, flowchart, df3,content[i].center(50), i, 0.3)
         for i in range(len(example)):
-            decrptwindow.after(i * 2000, flowchart, df3,example[i].center(50), i, 0.7)
+            decrptwindow.after(i * 500, flowchart, df3,example[i].center(50), i, 0.7)
         # print entry4.get()
         # print entry5.get()
         # print entry6.get()
@@ -320,9 +346,9 @@ def generate_keys():
         l4.destroy()
         l5.destroy()
         for i in range(len(content)):
-            keywindow.after(i*2000,flowchart,f3,content[i].center(50 ),i,0.3)
+            keywindow.after(i*500,flowchart,f3,content[i].center(50 ),i,0.3)
         for i in range(len(example)):
-            keywindow.after(i*2000,flowchart,f3,example[i].center(50 ),i,0.7)
+            keywindow.after(i*500,flowchart,f3,example[i].center(50 ),i,0.7)
         res = makeKeyFiles('rsa', int(e1.get()))
         if len(res):
             l1.config(text=res)
@@ -359,9 +385,19 @@ def main():
 
     f2 = Frame(mf, width=300, height=150)
     f2.pack()
+    f3 = Frame(mf, width=300, height=150)
+    f3.pack()
     Button(f2, text="Generate Keys", command=generate_keys_window).grid(row=0, column=27, sticky='ew', padx=38, pady=24)
     Button(f2, text="Encryption", command=encryption_window).grid(row=0, column=54, sticky='ew', padx=38, pady=24)
-    Button(f2, text="Decryption", command=decryption_window).grid(row=0, column=81, sticky='ew', padx=38, pady=24)]
-
+    Button(f2, text="Decryption", command=decryption_window).grid(row=0, column=81, sticky='ew', padx=38, pady=24)
+    image = PIL.Image.open("sasa.png")
+    image = image.resize((250, 250), PIL.Image.ANTIALIAS)
+    img = PIL.ImageTk.PhotoImage(image)
+    panel1 = Label(f3, image=img)
+    panel1.grid(row=0, column=0, columnspan=2, rowspan=2, sticky=W + E + N + S, padx=5, pady=5)
+    panel2 = Label(f3, image=img)
+    panel2.grid(row=0, column=55, columnspan=2, rowspan=2, sticky=W + E + N + S, padx=5, pady=5)
+    panel3 = Label(f3, image=img)
+    panel3.grid(row=0, column=110, columnspan=2, rowspan=2, sticky=W + E + N + S, padx=5, pady=5)
     root.mainloop()
 main()
