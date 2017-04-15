@@ -1,6 +1,6 @@
 import sys
 import shutil
-DEFAULT_BLOCK_SIZE = 128 # 128 bytes
+DEFAULT_BLOCK_SIZE = 256 # 128 bytes
 BYTE_SIZE = 256 # One byte has 256 different values.
 
 #def main(MODE):
@@ -204,7 +204,8 @@ def start(directory, prikeyfile, pubkeyfile, rnumfile):
     r=int(res1[1])
     G=int(res1[2])
 
-    split=(keysize-rsize)/rsize
+    split = (keysize - rsize) / 8
+    # split=(keysize-rsize)/rsize
 
     # f=open("message.txt","r")
     f = open(directory + "/" + "message.txt", "r")
@@ -220,7 +221,8 @@ def start(directory, prikeyfile, pubkeyfile, rnumfile):
             M=msg_to_binary(split_msg,rsize)
             X=(int(M,2))^G
             Xbin=bin(X)[2:]
-            XX='0'*(split-len(Xbin))+Xbin
+            # XX='0'*(split-len(Xbin))+Xbin
+            XX = '0' * ((split * 8) - len(Xbin)) + Xbin
             H=XX[:rsize]
             Y=(int(H,2))^r
             Ybin=bin(Y)[2:]
@@ -239,14 +241,16 @@ def start(directory, prikeyfile, pubkeyfile, rnumfile):
             f.write("\n")
         f.close()
     else:
-        k0=(split-(mlen%split))*rsize
+        # k0=(split-(mlen%split))*rsize
+        k0 = (split - (mlen % split)) * 8
         i=0
         while i<mlen/split:
             split_msg=msg[split*i:split*(i+1)]
             M=msg_to_binary(split_msg)
             X=(int(M,2))^G
             Xbin=bin(X)[2:]
-            XX='0'*(split-len(Xbin))+Xbin
+            # XX='0'*(split-len(Xbin))+Xbin
+            XX = '0' * ((split * 8) - len(Xbin)) + Xbin
             H=XX[:rsize]
             Y=(int(H,2))^r
             Ybin=bin(Y)[2:]
@@ -263,7 +267,8 @@ def start(directory, prikeyfile, pubkeyfile, rnumfile):
         M=M+'0'*k0
         X=(int(M,2))^G
         Xbin=bin(X)[2:]
-        XX='0'*(split-len(Xbin))+Xbin
+        # XX='0'*(split-len(Xbin))+Xbin
+        XX = '0' * ((split * 8) - len(Xbin)) + Xbin
         H=XX[:rsize]
         Y=(int(H,2))^r
         Ybin=bin(Y)[2:]
@@ -302,7 +307,8 @@ def end(directory, prikeyfile, pubkeyfile, rnumfile):
     r = int(res1[1])
     G = int(res1[2])
 
-    split = (keysize - rsize) / rsize
+    # split = (keysize - rsize) / rsize
+    split = (keysize - rsize) / 8
     # main('decrypt')
     main('decrypt', directory, prikeyfile, pubkeyfile)
     # f=open("padding_bits.txt","r")
@@ -330,15 +336,18 @@ def end(directory, prikeyfile, pubkeyfile, rnumfile):
         H=X[:rsize]
         rr=int(Y,2)^int(H,2)
         x=bin(rr)[2:]
-        res=(x*(split/rsize))+x[:(split%rsize)]
+        # res=(x*(split/rsize))+x[:(split%rsize)]
+        res = (x * ((split * 8) / rsize)) + x[:((split * 8) % rsize)]
         G=int(res,2)
         M=int(X,2)^G
         if k0==0:
             MM=bin(M)[2:]
-            MM='0'*((split*rsize)-len(MM))+MM
+            # MM='0'*((split*rsize)-len(MM))+MM
+            MM = '0' * ((split * 8) - len(MM)) + MM
         else:
             MM=bin(M)[2:-k0]
-            MM='0'*((split*rsize)-k0-len(MM))+MM
+            # MM='0'*((split*rsize)-k0-len(MM))+MM
+            MM = '0' * ((split * 8) - k0 - len(MM)) + MM
         MMM=binary_to_string(MM)
         print MMM
         # filenm="decr"+str(i+1)+".txt"

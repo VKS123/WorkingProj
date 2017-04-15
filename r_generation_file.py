@@ -9,7 +9,8 @@ def r_num_generator(rSize):
     f=open("random_file.txt","w")
     # rsize=8
     rsize=int(rSize)
-    split=(keysize-rsize)/8
+    # split=(keysize-rsize)/8
+    split=(keysize-rsize)
 
     n=rabinMiller.generateLargePrime(rsize)
     x=bin(n)[2:]
