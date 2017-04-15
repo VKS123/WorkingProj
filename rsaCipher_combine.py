@@ -1,6 +1,6 @@
 import sys
 import shutil
-DEFAULT_BLOCK_SIZE = 256 # 128 bytes
+DEFAULT_BLOCK_SIZE = 128 # 128 bytes
 BYTE_SIZE = 256 # One byte has 256 different values.
 
 #def main(MODE):
