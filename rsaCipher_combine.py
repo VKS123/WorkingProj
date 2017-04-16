@@ -7,10 +7,11 @@ BYTE_SIZE = 256 # One byte has 256 different values.
 
 def main(MODE,directory,prikeyfile,pubkeyfile):
     mode = MODE # set to 'encrypt' or 'decrypt'
-
+    flg=0
     if mode == 'encrypt':
         # pubKeyFilename = 'rsa_pubkey.txt'
         pubKeyFilename = pubkeyfile
+        privKeyFilename = prikeyfile
         # f=open("padding_bits.txt","r")
         f = open(directory + "/" + "padding_bits.txt", "r")
         pad_0_list=map(int,f.readlines())
@@ -22,30 +23,40 @@ def main(MODE,directory,prikeyfile,pubkeyfile):
                     filenm=directory + "/" + "msg"+str(i+1)+".txt"
                     # filename="encrypted_file"+str(i+1)+".txt"
                     filename=directory + "/" + "encrypted_file"+str(i+1)+".txt"
+                    dsafilename=directory + "/" + "sign_dsa_file"+str(i+1)+".txt"
                 else:
                     # filenm="msgpad.txt"
                     filenm=directory + "/" + "msgpad.txt"
                     # filename="encrypted_file_pad.txt"
                     filename=directory + "/" + "encrypted_file_pad.txt"
+                    dsafilename=directory + "/" + "sign_dsa_file_pad.txt"
+
             else:
                 # filenm="msg"+str(i+1)+".txt"
                 filenm=directory + "/" + "msg"+str(i+1)+".txt"
                 # filename="encrypted_file"+str(i+1)+".txt"
                 filename=directory + "/" + "encrypted_file"+str(i+1)+".txt"
+                dsafilename=directory + "/" + "sign_dsa_file"+str(i+1)+".txt"
             f=open(filenm,"r")
             s=f.read()
             f.close()
             message = s
             print('Encrypting and writing to %s...' % (filename))
             encryptedText = encryptAndWriteToFile(filename, pubKeyFilename, message)
-
+            signedText= encryptAndWriteToFile(dsafilename, privKeyFilename, message)
             print('Encrypted text:')
             print(encryptedText)
+            print('Signed text:')
+            print(signedText)
+
         shutil.make_archive('Enc', 'zip', directory)
+        flg=1
 
     elif mode == 'decrypt':
         # privKeyFilename = 'rsa_privkey.txt'
         privKeyFilename = prikeyfile
+        pubKeyFilename = pubkeyfile
+
         # f=open("padding_bits.txt","r")
         f = open(directory + "/" + "padding_bits.txt", "r")
         pad_0_list=map(int,f.readlines())
@@ -54,21 +65,34 @@ def main(MODE,directory,prikeyfile,pubkeyfile):
             if i==len(pad_0_list)-1:
                 if pad_0_list[-1]==0:
                     filenm=directory + "/" + "msg"+str(i+1)+".txt"
+                    dsafilenm=directory + "/" + "verify"+str(i+1)+".txt"
                     filename=directory + "/" + "encrypted_file"+str(i+1)+".txt"
+                    dsafilename=directory + "/" + "sign_dsa_file"+str(i+1)+".txt"
+
                 else:
                     filenm=directory + "/" + "msgpad.txt"
+                    dsafilenm=directory + "/" + "verifypad.txt"
                     filename=directory + "/" + "encrypted_file_pad.txt"
+                    dsafilename=directory + "/" + "sign_dsa_file_pad.txt"
             else:
                 filenm=directory + "/" + "msg"+str(i+1)+".txt"
+                dsafilenm=directory + "/" + "verify"+str(i+1)+".txt"
                 filename=directory + "/" + "encrypted_file"+str(i+1)+".txt"
+                dsafilename=directory + "/" + "sign_dsa_file"+str(i+1)+".txt"
             print('Reading from %s and decrypting...' % (filename))
             decryptedText = readFromFileAndDecrypt(filename, privKeyFilename)
+            verifiedText = readFromFileAndDecrypt(dsafilename, pubKeyFilename)
+            if decryptedText==verifiedText:
+                flg+=1
             f=open(filenm,"w")
             f.write(decryptedText)
             f.close()
+            f=open(dsafilenm,"w")
+            f.write(verifiedText)
+            f.close()
             print('Decrypted text:')
             print(decryptedText)
-
+    return flg
 
 def getBlocksFromText(message, blockSize=DEFAULT_BLOCK_SIZE):
 
@@ -287,7 +311,8 @@ def start(directory, prikeyfile, pubkeyfile, rnumfile):
         f.close()
 
     # main('encrypt')
-    main('encrypt', directory, prikeyfile, pubkeyfile)
+    flg=main('encrypt', directory, prikeyfile, pubkeyfile)
+    return flg
 # def end():
 def end(directory, prikeyfile, pubkeyfile, rnumfile):
     # f = open("rsa_privkey.txt", "r")
@@ -310,65 +335,71 @@ def end(directory, prikeyfile, pubkeyfile, rnumfile):
     # split = (keysize - rsize) / rsize
     split = (keysize - rsize) / 8
     # main('decrypt')
-    main('decrypt', directory, prikeyfile, pubkeyfile)
+    flg=main('decrypt', directory, prikeyfile, pubkeyfile)
     # f=open("padding_bits.txt","r")
     f = open(directory + "/" + "padding_bits.txt", "r")
     pad_0_list=map(int,f.readlines())
     f.close()
-    for i in range(len(pad_0_list)):
-        if i==len(pad_0_list)-1:
-            if pad_0_list[-1]==0:
+    if flg==len(pad_0_list):
+
+        for i in range(len(pad_0_list)):
+            if i==len(pad_0_list)-1:
+                if pad_0_list[-1]==0:
+                    # filename="msg"+str(i+1)+".txt"
+                    filename=directory + "/" + "msg"+str(i+1)+".txt"
+                else:
+                    # filename="msgpad.txt"
+                    filename=directory + "/" + "msgpad.txt"
+            else:
                 # filename="msg"+str(i+1)+".txt"
                 filename=directory + "/" + "msg"+str(i+1)+".txt"
+            f=open(filename,"r")
+            s=f.read()
+            f.close()
+            k0=pad_0_list[i]
+            pad=int(s)
+            Y=bin(pad)[-rsize:]
+            X=bin(pad)[2:-rsize]
+            H=X[:rsize]
+            rr=int(Y,2)^int(H,2)
+            x=bin(rr)[2:]
+            # res=(x*(split/rsize))+x[:(split%rsize)]
+            res = (x * ((split * 8) / rsize)) + x[:((split * 8) % rsize)]
+            G=int(res,2)
+            M=int(X,2)^G
+            if k0==0:
+                MM=bin(M)[2:]
+                # MM='0'*((split*rsize)-len(MM))+MM
+                MM = '0' * ((split * 8) - len(MM)) + MM
             else:
-                # filename="msgpad.txt"
-                filename=directory + "/" + "msgpad.txt"
-        else:
-            # filename="msg"+str(i+1)+".txt"
-            filename=directory + "/" + "msg"+str(i+1)+".txt"
-        f=open(filename,"r")
-        s=f.read()
-        f.close()
-        k0=pad_0_list[i]
-        pad=int(s)
-        Y=bin(pad)[-rsize:]
-        X=bin(pad)[2:-rsize]
-        H=X[:rsize]
-        rr=int(Y,2)^int(H,2)
-        x=bin(rr)[2:]
-        # res=(x*(split/rsize))+x[:(split%rsize)]
-        res = (x * ((split * 8) / rsize)) + x[:((split * 8) % rsize)]
-        G=int(res,2)
-        M=int(X,2)^G
-        if k0==0:
-            MM=bin(M)[2:]
-            # MM='0'*((split*rsize)-len(MM))+MM
-            MM = '0' * ((split * 8) - len(MM)) + MM
-        else:
-            MM=bin(M)[2:-k0]
-            # MM='0'*((split*rsize)-k0-len(MM))+MM
-            MM = '0' * ((split * 8) - k0 - len(MM)) + MM
-        MMM=binary_to_string(MM)
-        print MMM
-        # filenm="decr"+str(i+1)+".txt"
-        filenm=directory + "/" + "decr"+str(i+1)+".txt"
-        f=open(filenm,"w")
-        f.write(MMM)
-        f.close()
+                MM=bin(M)[2:-k0]
+                # MM='0'*((split*rsize)-k0-len(MM))+MM
+                MM = '0' * ((split * 8) - k0 - len(MM)) + MM
+            MMM=binary_to_string(MM)
+            print MMM
+            # filenm="decr"+str(i+1)+".txt"
+            filenm=directory + "/" + "decr"+str(i+1)+".txt"
+            f=open(filenm,"w")
+            f.write(MMM)
+            f.close()
 
-    final=""
-    for i in range(len(pad_0_list)):
-        # filenm="decr"+str(i+1)+".txt"
-        filenm=directory + "/" + "decr"+str(i+1)+".txt"
-        f=open(filenm,"r")
-        s=f.read()
+        final=""
+        for i in range(len(pad_0_list)):
+            # filenm="decr"+str(i+1)+".txt"
+            filenm=directory + "/" + "decr"+str(i+1)+".txt"
+            f=open(filenm,"r")
+            s=f.read()
+            f.close()
+            final=final+s
+        # f=open("final_decr.txt","w")
+        f=open(directory + "/" + "final_decr.txt","w")
+        f.write(final)
         f.close()
-        final=final+s
-    # f=open("final_decr.txt","w")
-    f=open(directory + "/" + "final_decr.txt","w")
-    f.write(final)
-    f.close()
-
+    else:
+        flg=0
+        print "Flag after verify",flg
+    return flg
 # the main() function.
 #if __name__ == '__main__':
 #    main()
+pow
