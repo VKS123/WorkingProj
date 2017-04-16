@@ -222,9 +222,9 @@ def encrypt():
         l6.destroy()
         l7.destroy()
         for i in range(len(content)):
-            encrptwindow.after(i * 500, flowchart, ef3,content[i].center(50), i, 0.3,0.03)
+            encrptwindow.after(i * 500, flowchart, ef3,content[i].center(50), i, 0.3,0.035)
         for i in range(len(example)):
-            encrptwindow.after(i * 500, flowchart, ef3,example[i].center(50), i, 0.7,0.03)
+            encrptwindow.after(i * 500, flowchart, ef3,example[i].center(50), i, 0.7,0.035)
         # print entry1.get()
         # print entry2.get()
         # print entry3.get()
