@@ -172,10 +172,13 @@ def encrypt():
         '↓',
         'k0 and k1 are integers fixed by the protocol.',
         '↓',
-        'm is the plaintext message, an (n − k0 − k1 )-bit string',
+        'm is the plaintext message, a (n−k0−k1)-bit string',
         '↓',
         'G and H are cryptographic hash functions fixed by the protocol.',
+<<<<<<< 6665b6fbbcb0e3cbb3495990aafbf9b406e5ed63
         '⊕ is an xor operation.',
+=======
+>>>>>>> Updated example flow chart of encryption and decryption
         '↓',
         'Messages are padded with k1 zeros to be n − k0 bits in length.',
         '↓',
@@ -193,28 +196,36 @@ def encrypt():
         '↓',
         'Represents the plaintext message as a positive integer m, 1 < m < n.',
         '↓',
-        'Computes the cipher text c = (m^e)mod n.',
+        'Computes the cipher text c = (m^e)mod n and sends it to B',
         '↓',
         'Sends the cipher text c to B.',
     ]
     example = [
-        ' Let P = 15 and Q = 11 keysize = 4',
+        'n = 10',
         '↓',
-        ' Rabin Miller algo verified P and Q is prime',
+        'k0 = 3, k1 = 2',
         '↓',
-        ' n = 15 * 11 => n = 165 ',
+        'm = 11010 (5 bits)',
         '↓',
-        ' phi( n ) = ( 15 - 1 ) * ( 11 - 1 ) => phi(n) = 140',
+        'G(), H() are hash functions',
         '↓',
-        ' e : GCD( e , 140 ) = 1  =>  e = 9',
+        'm padded with 2 zeroes => 1101000',
         '↓',
-        ' d: d * 9 = 1 mod 140 and d < 140 => d = 23',
+        'r = 101 (k0 bit string)',
         '↓',
-        ' Public Key : - 165 , 9 ',
+        'G = 1011011',
         '↓',
-        ' Private Key : - 165 , 23 ',
+        'X = 1101000 ⊕ 1011011 = 0110011',
         '↓',
-        '  R = 3 rsize = 2',
+        'H = 011',
+        '↓',
+        'Y = 101 ⊕ 011 = 110',
+        '↓',
+        'n = 676033, e = 48017',
+        '↓',
+        'm = 0110011110',
+        '↓',
+        'c = '
     ]
     if len(entry1.get())==0 or len(entry2.get())==0 or len(entry3.get())==0 or len(entry7.get())==0:
         l2.config(text="Please provide all inputs")
@@ -243,30 +254,22 @@ def encrypt():
 
 def decrypt():
     content = [
-        'Recepient uses his private key (n, d) to compute m = (c^d)mod n.',
+        'Recepient uses his private key (n, d)',
+        '↓',
+        'Computes m = (c^d)mod n.',
         '↓',
         'Recover the random string as r = Y ⊕ H(X)',
         '↓',
         'Recover the message as m00..0 = X ⊕ G(r)'
     ]
     example = [
-        ' Let P = 15 and Q = 11 keysize = 4',
+        'n = 676033, d = 48017',
         '↓',
-        ' Rabin Miller algo verified P and Q is prime',
+        'm = 0110011110',
         '↓',
-        ' n = 15 * 11 => n = 165 ',
+        'r = 110 ⊕ 011 = 101',
         '↓',
-        ' phi( n ) = ( 15 - 1 ) * ( 11 - 1 ) => phi(n) = 140',
-        '↓',
-        ' e : GCD( e , 140 ) = 1  =>  e = 9',
-        '↓',
-        ' d: d * 9 = 1 mod 140 and d < 140 => d = 23',
-        '↓',
-        ' Public Key : - 165 , 9 ',
-        '↓',
-        ' Private Key : - 165 , 23 ',
-        '↓',
-        '  R = 3 rsize = 2',
+        'm = 0110011 ⊕ 1011011 = 1101000'
     ]
     if len(entry4.get())==0 or len(entry5.get())==0 or len(entry6.get())==0 or len(entry8.get())==0:
         l3.config(text="Please provide all inputs")
