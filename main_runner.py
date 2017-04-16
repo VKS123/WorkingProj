@@ -60,8 +60,8 @@ def decryption_window():
     Button(df1, text="Browse", background="yellow", foreground="black", activebackground="black", activeforeground="white", command=lambda: open_file(entry6)).grid(row=2, column=27, sticky='ew', padx=8, pady=4)
     Button(df1, text="Browse", background="yellow", foreground="black", activebackground="black", activeforeground="white", command=lambda: open_file(entry8)).grid(row=3, column=27, sticky='ew', padx=8, pady=4)
     Button(df1, text="Flow diagram", background="black", foreground="white", command=lambda: create_window(df1,"img2.png","img4.png")).place(relx=0.8, rely=0.2)
-    Button(df1, text="Decrypt", background="blue", foreground="white", activebackground="black", activeforeground="white", command=decrypt).grid(row=5, column=0, sticky='we', padx=8, pady=4)
-    Button(df1, text="Back", background="red", foreground="white", activebackground="black", activeforeground="white", command=close_decryption_window).grid(row=5, column=2, sticky='we', padx=8, pady=4)
+    Button(df1, text="Back", background="red", foreground="white", activebackground="black", activeforeground="white", command=close_decryption_window).grid(row=5, column=0, sticky='we', padx=8, pady=4)
+    Button(df1, text="Decrypt", background="blue", foreground="white", activebackground="black", activeforeground="white", command=decrypt).grid(row=5, column=12, sticky='we', padx=8, pady=4)
 
 def create_window(f,i1,i2):
     window = Toplevel(f)
@@ -121,9 +121,8 @@ def encryption_window():
     Button(ef1, text="Browse", background="yellow", foreground="black", activebackground="black", activeforeground="white", command=lambda: open_file(entry3)).grid(row=2, column=27, sticky='ew', padx=8, pady=4)
     Button(ef1, text="Browse", background="yellow", foreground="black", activebackground="black", activeforeground="white", command=lambda: open_file(entry7)).grid(row=3, column=27, sticky='ew', padx=8, pady=4)
     Button(ef1, text="Flow diagram", background="black", foreground="white", command=lambda: create_window(ef1,"img2.png","img3.png")).place(relx=0.8,rely=0.2)
-    Button(ef1, text="Encrypt", background="blue", foreground="white", activebackground="black", activeforeground="white", command=encrypt).grid(row=5, column=0, sticky='we', padx=8, pady=4)
-    Button(ef1, text="Back", background="red", foreground="white", activebackground="black", activeforeground="white", command=close_encryption_window).grid(row=5, column=2, sticky='we', padx=8, pady=4)
-
+    Button(ef1, text="Back", background="red", foreground="white", activebackground="black", activeforeground="white", command=close_encryption_window).grid(row=5, column=0, sticky='we', padx=8, pady=4)
+    Button(ef1, text="Encrypt", background="blue", foreground="white", activebackground="black", activeforeground="white", command=encrypt).grid(row=5, column=12, sticky='we', padx=8, pady=4)
 
 def generate_keys_window():
     close_main()
@@ -147,14 +146,14 @@ def generate_keys_window():
     l4.place(relx=0.5, rely=0.4, anchor=CENTER)
     l5 = Label(f3, text="FLOW CHART")
     l5.place(relx=0.5, rely=0.5, anchor=CENTER)
-    Label(f1, text="Key size :-").grid(row=1, column=3, sticky='e', padx=10, pady=4)
-    Label(f1, text="Random number r size :-").grid(row=2, column=3, sticky='e', padx=10, pady=4)
+    Label(f1, text="Key size :-").grid(row=1, column=5, sticky='e', padx=10, pady=4)
+    Label(f1, text="Random number r size :-").grid(row=2, column=5, sticky='e', padx=10, pady=4)
     l1=Label(f1)
-    l1.grid(row=3, column=4, sticky='e')
+    l1.grid(row=3, column=6, sticky='e')
     e1 = Entry(f1)
-    e1.grid(row=1, column=4, padx=2, pady=2, sticky='w')
+    e1.grid(row=1, column=6, padx=2, pady=2, sticky='w')
     e2 = Entry(f1)
-    e2.grid(row=2, column=4, padx=2, pady=2, sticky='w')
+    e2.grid(row=2, column=6, padx=2, pady=2, sticky='w')
 
     # logo_filepath = "img1.png"
     # img = PhotoImage(file=logo_filepath)
@@ -162,8 +161,8 @@ def generate_keys_window():
     # logo = Label(f2, image=img)
     # logo.photo = img
     # logo.grid(row=0, column=0, rowspan=550, columnspan=250)
-    Button(f1, text="Generate", background="blue", foreground="white", activebackground="black", activeforeground="white", width=12, command=generate_keys).grid(row=4, column=0, sticky='e', padx=8, pady=4)
-    Button(f1, text="Back", background="red", foreground="white", activebackground="black", activeforeground="white", width=12, command=close_generate_keys_window).grid(row=4, column=1, sticky='e', padx=8, pady=4)
+    Button(f1, text="Back", background="red", foreground="white", activebackground="black", activeforeground="white", width=12, command=close_generate_keys_window).grid(row=4, column=0, sticky='e', padx=8, pady=4)
+    Button(f1, text="Generate", background="blue", foreground="white", activebackground="black", activeforeground="white", width=12, command=generate_keys).grid(row=4, column=6, sticky='e', padx=8, pady=4)
 
 
 def encrypt():
@@ -188,11 +187,11 @@ def encrypt():
         '↓',
         'Y = r ⊕ H(X)',
         '↓',
-        'Obtains the recipient B\'s public key (n, e).',
+        'Obtains the recipient B\'s public key (N, e).',
         '↓',
-        'Represents the plaintext message as a positive integer m, 1 < m < n.',
+        'Represents the plaintext message as a positive integer m',
         '↓',
-        'Computes the cipher text c = (m^e)mod n and sends it to B'
+        'Computes cipher text c = (m^e)mod N and sends to recepient B'
     ]
     example = [
         'n = 10',
@@ -215,11 +214,11 @@ def encrypt():
         '↓',
         'Y = 101 ⊕ 011 = 110',
         '↓',
-        'n = 676033, e = 48017',
+        'N = 521909, e = 575',
         '↓',
-        'm = 0110011110',
+        'm = 0110011110 (X || Y) = 414',
         '↓',
-        'c = '
+        'c = (414^575) mod 521909 = 514331'
     ]
     if len(entry1.get())==0 or len(entry2.get())==0 or len(entry3.get())==0 or len(entry7.get())==0:
         l2.config(text="Please provide all inputs")
@@ -248,18 +247,18 @@ def encrypt():
 
 def decrypt():
     content = [
-        'Recepient uses his private key (n, d)',
+        'Recepient uses his private key (N, d)',
         '↓',
-        'Computes m = (c^d)mod n.',
+        'Computes m = (c^d)mod N.',
         '↓',
         'Recover the random string as r = Y ⊕ H(X)',
         '↓',
-        'Recover the message as m00..0 = X ⊕ G(r)'
+        'Recover the padded message as m00..0 = X ⊕ G(r)'
     ]
     example = [
-        'n = 676033, d = 48017',
+        'N = 521909, d = 12671',
         '↓',
-        'm = 0110011110',
+        'm = (514331 ^ 12671)mod 521909 = 414 => 0110011110',
         '↓',
         'r = 110 ⊕ 011 = 101',
         '↓',
@@ -303,42 +302,42 @@ def flowchart(f,t,r,c,q):
 
 def generate_keys():
     content=[
-        ' Generating prime number P and Q of keysize bits',
+        'Generating prime number P and Q of keysize bits',
         '↓',
-        ' Rabin Miller algorithm to confirm the numbers P and Q are prime',
+        'Rabin Miller algorithm to confirm the numbers P and Q are prime',
         '↓',
-        ' Compute the RSA modulus n=p*q',
+        'Compute the RSA modulus N = p * q',
         '↓',
-        ' Compute the Euler\'s totient function Φ(n) = (p-1)*(q-1)',
+        'Compute the Euler\'s totient function Φ(n) = (p-1)*(q-1)',
         '↓',
-        ' Select the public exponent e : GCD(e, Φ(n)) = 1',
+        'Select the public exponent e : GCD(e, Φ(n)) = 1',
         '↓',
-        ' Select the private exponent d : d*e = 1 mod Φ(n) and d < Φ(n)',
+        'Select the private exponent d : d*e = 1 mod Φ(n) and d < Φ(n)',
         '↓',
-        ' Public Key : - n , e ',
+        'Public Key : - N, e ',
         '↓',
-        ' Private Key : - n , d ',
+        'Private Key : - N, d ',
         '↓',
-        ' Generating prime number R of rsize bits',
+        'Generating prime number R of rsize bits',
     ]
     example=[
-        ' Let P = 15 and Q = 11, keysize = 4',
+        'Let P = 557 and Q = 937, keysize = 10',
         '↓',
-        ' Rabin Miller algorithm verifies that P and Q are prime',
+        'Rabin Miller algorithm verifies that P and Q are prime',
         '↓',
-        ' n = 15 * 11 => n = 165 ',
+        'N = 557 * 937 => N = 521909 ',
         '↓',
-        ' Φ(n) = (15 - 1) * (11 - 1) => Φ(n) = 140',
+        'Φ(n) = (557 - 1) * (937 - 1) => Φ(n) = 520416',
         '↓',
-        ' e : GCD(e, 140) = 1  =>  e = 9',
+        'e : GCD(e, 520416) = 1  =>  e = 575',
         '↓',
-        ' d : d*9 = 1 mod 140 and d < 140 => d = 23',
+        'd : d*575 = 1 mod 520416 and d < 520416 => d = 12671',
         '↓',
-        ' Public Key : - 165, 9 ',
+        'Public Key : 521909, 575 ',
         '↓',
-        ' Private Key : - 165, 23 ',
+        'Private Key : 521909, 12671 ',
         '↓',
-        ' R = 3 rsize = 2',
+        'R = 5, rsize = 3',
     ]
     if len(e1.get())==0 or len(e2.get())==0:
         l1.config(text="Please provide all inputs")
