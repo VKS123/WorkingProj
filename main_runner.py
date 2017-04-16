@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import os
 from tkFileDialog import askopenfilename
 from Tkinter import *
@@ -55,13 +54,13 @@ def decryption_window():
     entry6.grid(row=2, column=2, padx=2, pady=2, sticky='we', columnspan=25)
     entry8 = Entry(df1, width=50, textvariable=file_path)
     entry8.grid(row=3, column=2, padx=2, pady=2, sticky='we', columnspan=25)
-    Button(df1, text="Browse", command=lambda: open_file(entry4)).grid(row=0, column=27, sticky='ew', padx=8, pady=4)
-    Button(df1, text="Browse", command=lambda: open_file(entry5)).grid(row=1, column=27, sticky='ew', padx=8, pady=4)
-    Button(df1, text="Browse", command=lambda: open_file(entry6)).grid(row=2, column=27, sticky='ew', padx=8, pady=4)
-    Button(df1, text="Browse", command=lambda: open_file(entry8)).grid(row=3, column=27, sticky='ew', padx=8, pady=4)
-    Button(df1, text="Flow diagram", command=lambda: create_window(df1,"img2.png","img4.png")).place(relx=0.8, rely=0.2)
-    Button(df1, text="Decrypt", command=decrypt).grid(row=5, column=0, sticky='we', padx=8, pady=4)
-    Button(df1, text="Back", command=close_decryption_window).grid(row=5, column=2, sticky='we', padx=8, pady=4)
+    Button(df1, text="Browse", background="yellow", foreground="black", activebackground="black", activeforeground="white", command=lambda: open_file(entry4)).grid(row=0, column=27, sticky='ew', padx=8, pady=4)
+    Button(df1, text="Browse", background="yellow", foreground="black", activebackground="black", activeforeground="white", command=lambda: open_file(entry5)).grid(row=1, column=27, sticky='ew', padx=8, pady=4)
+    Button(df1, text="Browse", background="yellow", foreground="black", activebackground="black", activeforeground="white", command=lambda: open_file(entry6)).grid(row=2, column=27, sticky='ew', padx=8, pady=4)
+    Button(df1, text="Browse", background="yellow", foreground="black", activebackground="black", activeforeground="white", command=lambda: open_file(entry8)).grid(row=3, column=27, sticky='ew', padx=8, pady=4)
+    Button(df1, text="Flow diagram", background="black", foreground="white", command=lambda: create_window(df1,"img2.png","img4.png")).place(relx=0.8, rely=0.2)
+    Button(df1, text="Decrypt", background="blue", foreground="white", activebackground="black", activeforeground="white", command=decrypt).grid(row=5, column=0, sticky='we', padx=8, pady=4)
+    Button(df1, text="Back", background="red", foreground="white", activebackground="black", activeforeground="white", command=close_decryption_window).grid(row=5, column=2, sticky='we', padx=8, pady=4)
 
 def create_window(f,i1,i2):
     window = Toplevel(f)
@@ -116,13 +115,13 @@ def encryption_window():
     entry3.grid(row=2, column=2, padx=2, pady=2, sticky='we', columnspan=25)
     entry7 = Entry(ef1, width=50, textvariable=file_path)
     entry7.grid(row=3, column=2, padx=2, pady=2, sticky='we', columnspan=25)
-    Button(ef1, text="Browse", command=lambda: open_file(entry1)).grid(row=0, column=27, sticky='ew', padx=8, pady=4)
-    Button(ef1, text="Browse", command=lambda: open_file(entry2)).grid(row=1, column=27, sticky='ew', padx=8, pady=4)
-    Button(ef1, text="Browse", command=lambda: open_file(entry3)).grid(row=2, column=27, sticky='ew', padx=8, pady=4)
-    Button(ef1, text="Browse", command=lambda: open_file(entry7)).grid(row=3, column=27, sticky='ew', padx=8, pady=4)
-    Button(ef1, text="Flow diagram", command=lambda: create_window(ef1,"img2.png","img3.png")).place(relx=0.8,rely=0.2)
-    Button(ef1, text="Encrypt", command=encrypt).grid(row=5, column=0, sticky='we', padx=8, pady=4)
-    Button(ef1, text="Back",  command=close_encryption_window).grid(row=5, column=2, sticky='we', padx=8, pady=4)
+    Button(ef1, text="Browse", background="yellow", foreground="black", activebackground="black", activeforeground="white", command=lambda: open_file(entry1)).grid(row=0, column=27, sticky='ew', padx=8, pady=4)
+    Button(ef1, text="Browse", background="yellow", foreground="black", activebackground="black", activeforeground="white", command=lambda: open_file(entry2)).grid(row=1, column=27, sticky='ew', padx=8, pady=4)
+    Button(ef1, text="Browse", background="yellow", foreground="black", activebackground="black", activeforeground="white", command=lambda: open_file(entry3)).grid(row=2, column=27, sticky='ew', padx=8, pady=4)
+    Button(ef1, text="Browse", background="yellow", foreground="black", activebackground="black", activeforeground="white", command=lambda: open_file(entry7)).grid(row=3, column=27, sticky='ew', padx=8, pady=4)
+    Button(ef1, text="Flow diagram", background="black", foreground="white", command=lambda: create_window(ef1,"img2.png","img3.png")).place(relx=0.8,rely=0.2)
+    Button(ef1, text="Encrypt", background="blue", foreground="white", activebackground="black", activeforeground="white", command=encrypt).grid(row=5, column=0, sticky='we', padx=8, pady=4)
+    Button(ef1, text="Back", background="red", foreground="white", activebackground="black", activeforeground="white", command=close_encryption_window).grid(row=5, column=2, sticky='we', padx=8, pady=4)
 
 
 def generate_keys_window():
@@ -150,11 +149,11 @@ def generate_keys_window():
     Label(f1, text="Key size :-").grid(row=1, column=3, sticky='e', padx=10, pady=4)
     Label(f1, text="Random number r size :-").grid(row=2, column=3, sticky='e', padx=10, pady=4)
     l1=Label(f1)
-    l1.grid(row=3, column=4, sticky='we')
+    l1.grid(row=3, column=4, sticky='e')
     e1 = Entry(f1)
-    e1.grid(row=1, column=4, padx=2, pady=2, sticky='we')
+    e1.grid(row=1, column=4, padx=2, pady=2, sticky='e')
     e2 = Entry(f1)
-    e2.grid(row=2, column=4, padx=2, pady=2, sticky='we')
+    e2.grid(row=2, column=4, padx=2, pady=2, sticky='e')
 
     # logo_filepath = "img1.png"
     # img = PhotoImage(file=logo_filepath)
@@ -162,47 +161,57 @@ def generate_keys_window():
     # logo = Label(f2, image=img)
     # logo.photo = img
     # logo.grid(row=0, column=0, rowspan=550, columnspan=250)
-    Button(f1, text="Generate", width=12, command=generate_keys).grid(row=4, column=0, sticky='we', padx=8, pady=4)
-    Button(f1, text="Back", width=12, command=close_generate_keys_window).grid(row=4, column=1, sticky='we', padx=8, pady=4)
+    Button(f1, text="Generate", background="blue", foreground="white", activebackground="black", activeforeground="white", width=12, command=generate_keys).grid(row=4, column=0, sticky='e', padx=8, pady=4)
+    Button(f1, text="Back", background="red", foreground="white", activebackground="black", activeforeground="white", width=12, command=close_generate_keys_window).grid(row=4, column=1, sticky='e', padx=8, pady=4)
 
 
 def encrypt():
     content = [
-        ' Generating prime number P and Q of keysize bits',
-        '|',
-        ' Rabin Miller algo to confirm the number is prime',
-        '|',
-        ' Compute n= p * q',
-        '|',
-        ' Compute phi( n ) = ( p - 1 ) * ( q - 1 )',
-        '|',
-        ' Select e : GCD( e , phi( n ) ) = 1',
-        '|',
-        ' Select d: d * e = 1 mod phi( n ) and d < phi( n )',
-        '|',
-        ' Public Key : - n , e ',
-        '|',
-        ' Private Key : - n , d ',
-        '|',
-        '  Generating prime number R of rsize bits',
+        'n is the number of bits in the RSA modulus.',
+        '↓',
+        'k0 and k1 are integers fixed by the protocol.',
+        '↓',
+        'm is the plaintext message, an (n − k0 − k1 )-bit string',
+        '↓',
+        'G and H are cryptographic hash functions fixed by the protocol.⊕ is an xor operation.',
+        '↓',
+        'Messages are padded with k1 zeros to be n − k0 bits in length.',
+        '↓',
+        'r is a randomly generated k0-bit string',
+        '↓',
+        'G expands the k0 bits of r to n − k0 bits.',
+        '↓',
+        'X = m00..0 ⊕ G(r)',
+        '↓',
+        'H reduces the n − k0 bits of X to k0 bits.',
+        '↓',
+        'Y = r ⊕ H(X)',
+        '↓',
+        'Obtains the recipient B\'s public key (n, e).',
+        '↓',
+        'Represents the plaintext message as a positive integer m, 1 < m < n.',
+        '↓',
+        'Computes the cipher text c = (m^e)mod n.',
+        '↓',
+        'Sends the cipher text c to B.',
     ]
     example = [
         ' Let P = 15 and Q = 11 keysize = 4',
-        '|',
+        '↓',
         ' Rabin Miller algo verified P and Q is prime',
-        '|',
+        '↓',
         ' n = 15 * 11 => n = 165 ',
-        '|',
+        '↓',
         ' phi( n ) = ( 15 - 1 ) * ( 11 - 1 ) => phi(n) = 140',
-        '|',
+        '↓',
         ' e : GCD( e , 140 ) = 1  =>  e = 9',
-        '|',
+        '↓',
         ' d: d * 9 = 1 mod 140 and d < 140 => d = 23',
-        '|',
+        '↓',
         ' Public Key : - 165 , 9 ',
-        '|',
+        '↓',
         ' Private Key : - 165 , 23 ',
-        '|',
+        '↓',
         '  R = 3 rsize = 2',
     ]
     if len(entry1.get())==0 or len(entry2.get())==0 or len(entry3.get())==0 or len(entry7.get())==0:
@@ -232,41 +241,29 @@ def encrypt():
 
 def decrypt():
     content = [
-        ' Generating prime number P and Q of keysize bits',
-        '|',
-        ' Rabin Miller algo to confirm the number is prime',
-        '|',
-        ' Compute n= p * q',
-        '|',
-        ' Compute phi( n ) = ( p - 1 ) * ( q - 1 )',
-        '|',
-        ' Select e : GCD( e , phi( n ) ) = 1',
-        '|',
-        ' Select d: d * e = 1 mod phi( n ) and d < phi( n )',
-        '|',
-        ' Public Key : - n , e ',
-        '|',
-        ' Private Key : - n , d ',
-        '|',
-        '  Generating prime number R of rsize bits',
+        'Recepient uses his private key (n, d) to compute m = (c^d)mod n.',
+        '↓',
+        'Recover the random string as r = Y ⊕ H(X)',
+        '↓',
+        'Recover the message as m00..0 = X ⊕ G(r)'
     ]
     example = [
         ' Let P = 15 and Q = 11 keysize = 4',
-        '|',
+        '↓',
         ' Rabin Miller algo verified P and Q is prime',
-        '|',
+        '↓',
         ' n = 15 * 11 => n = 165 ',
-        '|',
+        '↓',
         ' phi( n ) = ( 15 - 1 ) * ( 11 - 1 ) => phi(n) = 140',
-        '|',
+        '↓',
         ' e : GCD( e , 140 ) = 1  =>  e = 9',
-        '|',
+        '↓',
         ' d: d * 9 = 1 mod 140 and d < 140 => d = 23',
-        '|',
+        '↓',
         ' Public Key : - 165 , 9 ',
-        '|',
+        '↓',
         ' Private Key : - 165 , 23 ',
-        '|',
+        '↓',
         '  R = 3 rsize = 2',
     ]
     if len(entry4.get())==0 or len(entry5.get())==0 or len(entry6.get())==0 or len(entry8.get())==0:
@@ -380,7 +377,7 @@ def close_main():
 
 
 def main():
-    global root
+    global root,l1,l2
     root = Tk()
     root.title('')
     root.geometry()
@@ -391,29 +388,39 @@ def main():
     f2.pack()
     f3 = Frame(mf, width=300, height=10)
     f3.pack()
-    Button(f2, text="Key Generation", command=generate_keys_window).grid(row=0, column=27, sticky='ew', padx=38, pady=24)
-    Button(f2, text="Encryption", command=encryption_window).grid(row=0, column=54, sticky='ew', padx=38, pady=24)
-    Button(f2, text="Decryption", command=decryption_window).grid(row=0, column=81, sticky='ew', padx=38, pady=24)
-    logo_filepath = "sasa.png"
-    img = PhotoImage(file=logo_filepath)
-    img = img.subsample(5)
-    panel1 = Label(f3, image=img)
-    panel1.photo = img
-    panel1.grid(row=0, column=0, columnspan=2, rowspan=2, sticky=W + E + N + S, padx=5, pady=5)
-    logo_filepath1 = "vid.png"
-    img1 = PhotoImage(file=logo_filepath1)
-    img1 = img1.subsample(6)
-
-    panel2 = Label(f3, image=img1)
-    panel2.photo = img1
-    panel2.grid(row=0, column=55, columnspan=2, rowspan=2, sticky=W + E + N + S, padx=5, pady=5)
-
-    logo_filepath2 = "selva.png"
-    img2 = PhotoImage(file=logo_filepath2)
-    img2 = img2.subsample(2)
-    panel3 = Label(f3, image=img2)
-    panel3.photo = img2
-    panel3.grid(row=0, column=110, columnspan=2, rowspan=2, sticky=W + E + N + S, padx=5, pady=5)
+    Button(f2, text="Key Generation", background="yellow", foreground="black", activebackground="black", activeforeground="white", command=generate_keys_window).grid(row=0, column=27, sticky='ew', padx=38, pady=10)
+    Button(f2, text="Encryption",  background="blue", foreground="white", activebackground="black", activeforeground="white", command=encryption_window).grid(row=0, column=54, sticky='ew', padx=38, pady=10)
+    Button(f2, text="Decryption",  background="red", foreground="white", activebackground="black", activeforeground="white", command=decryption_window).grid(row=0, column=81, sticky='ew', padx=38, pady=10)
+##    logo_filepath = "sasa.png"
+##    img = PhotoImage(file=logo_filepath)
+##    img = img.subsample(5)
+##    panel1 = Label(f3, image=img)
+##    panel1.photo = img
+##    panel1.grid(row=0, column=0, columnspan=2, rowspan=2, sticky=W + E + N + S, padx=5, pady=5)
+##    logo_filepath1 = "vid.png"
+##    img1 = PhotoImage(file=logo_filepath1)
+##    img1 = img1.subsample(6)
+##
+##    panel2 = Label(f3, image=img1)
+##    panel2.photo = img1
+##    panel2.grid(row=0, column=55, columnspan=2, rowspan=2, sticky=W + E + N + S, padx=5, pady=5)
+##
+##    logo_filepath2 = "selva.png"
+##    img2 = PhotoImage(file=logo_filepath2)
+##    img2 = img2.subsample(2)
+##    panel3 = Label(f3, image=img2)
+##    panel3.photo = img2
+##    panel3.grid(row=0, column=110, columnspan=2, rowspan=2, sticky=W + E + N + S, padx=5, pady=5)
+    f1 = Frame(root, width=300, height=100)
+    f1.pack(fill=X)
+    l1 = Label(f1, text="Final Year Project done by")
+    l1.place(relx=0.5, rely=0.1, anchor=CENTER)
+    l1 = Label(f1, text="Vidit Shah (1031310355)")
+    l1.place(relx=0.5, rely=0.3, anchor=CENTER)
+    l2 = Label(f1, text="Sahil Baid (1031310670)")
+    l2.place(relx=0.5, rely=0.5, anchor=CENTER)
+    l3 = Label(f1, text="under the guidance of S. Selvakumar")
+    l3.place(relx=0.5, rely=0.7, anchor=CENTER)
     root.mainloop()
 main()
 
