@@ -1,6 +1,4 @@
 import os
-import PIL.Image
-import PIL.ImageTk
 from tkFileDialog import askopenfilename
 from Tkinter import *
 from rsaKeyGeneration import *
@@ -47,7 +45,7 @@ def decryption_window():
     Label(df1, text="Select R num File").grid(row=2, column=0, sticky='e')
     Label(df1, text="Select File for Decryption").grid(row=3, column=0, sticky='e')
     l3 = Label(df1)
-    l3.grid(row=3, column=5, sticky='we')
+    l3.grid(row=4, column=5, sticky='we')
     entry4 = Entry(df1, width=50, textvariable=file_path)
     entry4.grid(row=0, column=1, padx=2, pady=2, sticky='we', columnspan=25)
     entry5 = Entry(df1, width=50, textvariable=file_path)
@@ -61,8 +59,8 @@ def decryption_window():
     Button(df1, text="Browse", command=lambda: open_file(entry6)).grid(row=2, column=27, sticky='ew', padx=8, pady=4)
     Button(df1, text="Browse", command=lambda: open_file(entry8)).grid(row=3, column=27, sticky='ew', padx=8, pady=4)
     Button(df1, text="FlowDiag", command=lambda: create_window(df1,"img2.png","img4.png")).place(relx=0.8, rely=0.2)
-    Button(df1, text="Decrypt", command=decrypt).grid(row=4, column=0, sticky='we', padx=8, pady=4)
-    Button(df1, text="Back", command=close_decryption_window).grid(row=4, column=2, sticky='we', padx=8, pady=4)
+    Button(df1, text="Decrypt", command=decrypt).grid(row=5, column=0, sticky='we', padx=8, pady=4)
+    Button(df1, text="Back", command=close_decryption_window).grid(row=5, column=2, sticky='we', padx=8, pady=4)
 
 def create_window(f,i1,i2):
     window = Toplevel(f)
@@ -108,7 +106,7 @@ def encryption_window():
     Label(ef1, text="Select the R num File").grid(row=2, column=0, sticky='e')
     Label(ef1, text="Select File for Encryption").grid(row=3, column=0, sticky='e')
     l2 = Label(ef1)
-    l2.grid(row=3, column=5, sticky='we')
+    l2.grid(row=4, column=5, sticky='we')
     entry1 = Entry(ef1, width=50, textvariable=file_path)
     entry1.grid(row=0, column=1, padx=2, pady=2, sticky='we', columnspan=25)
     entry2 = Entry(ef1, width=50, textvariable=file_path)
@@ -123,8 +121,8 @@ def encryption_window():
     Button(ef1, text="Browse", command=lambda: open_file(entry7)).grid(row=3, column=27, sticky='ew', padx=8, pady=4)
 
     Button(ef1, text="FlowDiag", command=lambda: create_window(ef1,"img2.png","img3.png")).place(relx=0.8,rely=0.2)
-    Button(ef1, text="Encrypt", command=encrypt).grid(row=4, column=0, sticky='we', padx=8, pady=4)
-    Button(ef1, text="Back",  command=close_encryption_window).grid(row=4, column=2, sticky='we', padx=8, pady=4)
+    Button(ef1, text="Encrypt", command=encrypt).grid(row=5, column=0, sticky='we', padx=8, pady=4)
+    Button(ef1, text="Back",  command=close_encryption_window).grid(row=5, column=2, sticky='we', padx=8, pady=4)
 
 
 def generate_keys_window():
@@ -389,20 +387,26 @@ def main():
     Button(f2, text="Generate Keys", command=generate_keys_window).grid(row=0, column=27, sticky='ew', padx=38, pady=24)
     Button(f2, text="Encryption", command=encryption_window).grid(row=0, column=54, sticky='ew', padx=38, pady=24)
     Button(f2, text="Decryption", command=decryption_window).grid(row=0, column=81, sticky='ew', padx=38, pady=24)
-    image = PIL.Image.open("sasa.png")
-    image = image.resize((250, 250), PIL.Image.ANTIALIAS)
-    img = PIL.ImageTk.PhotoImage(image)
+
+    logo_filepath = "sasa.png"
+    img = PhotoImage(file=logo_filepath)
+    img = img.subsample(5)
     panel1 = Label(f3, image=img)
+    panel1.photo = img
     panel1.grid(row=0, column=0, columnspan=2, rowspan=2, sticky=W + E + N + S, padx=5, pady=5)
-    image2 = PIL.Image.open("vidit.jpg")
-    image2 = image2.resize((250, 250), PIL.Image.ANTIALIAS)
-    img1 = PIL.ImageTk.PhotoImage(image2)
+    logo_filepath1 = "vid.png"
+    img1 = PhotoImage(file=logo_filepath1)
+    img1 = img1.subsample(6)
+
     panel2 = Label(f3, image=img1)
+    panel2.photo = img1
     panel2.grid(row=0, column=55, columnspan=2, rowspan=2, sticky=W + E + N + S, padx=5, pady=5)
-    image3 = PIL.Image.open("s_selvakumar.jpg")
-    image3 = image3.resize((250, 250), PIL.Image.ANTIALIAS)
-    img2 = PIL.ImageTk.PhotoImage(image3)
+
+    logo_filepath2 = "selva.png"
+    img2 = PhotoImage(file=logo_filepath2)
+    img2 = img2.subsample(2)
     panel3 = Label(f3, image=img2)
+    panel3.photo = img2
     panel3.grid(row=0, column=110, columnspan=2, rowspan=2, sticky=W + E + N + S, padx=5, pady=5)
     root.mainloop()
 main()
