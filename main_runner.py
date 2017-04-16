@@ -37,7 +37,7 @@ def decryption_window():
     # df2.pack()
     df3 = Frame(df, highlightbackground="green", highlightcolor="green", highlightthickness=3, width=1000, height=1000)
     df3.pack()
-    l8 = Label(df3, text="Please fill in the input fields to generate the Decryption")
+    l8 = Label(df3, text="Please fill in the input fields and file to get decrypted to generate the Decryption")
     l8.place(relx=0.5, rely=0.4, anchor=CENTER)
     l9 = Label(df3, text="FLOW CHART")
     l9.place(relx=0.5, rely=0.5, anchor=CENTER)
@@ -98,7 +98,7 @@ def encryption_window():
     # ef2.pack()
     ef3 = Frame(ef, highlightbackground="green", highlightcolor="green", highlightthickness=3, width=1000, height=1000)
     ef3.pack()
-    l6 = Label(ef3, text="Please fill in the input fields to generate the Encrypion")
+    l6 = Label(ef3, text="Please fill in the input fields and wait for the file to get encrypted to generate the Encrypion")
     l6.place(relx=0.5, rely=0.4, anchor=CENTER)
     l7 = Label(ef3, text="FLOW CHART")
     l7.place(relx=0.5, rely=0.5, anchor=CENTER)
@@ -138,8 +138,8 @@ def generate_keys_window():
     kf.pack()
     f1 = Frame(kf, width=300, height=150)
     f1.pack(fill=X)
-    # f2 = Frame(kf, width=300, height=150)
-    # f2.pack()
+##    f2 = Frame(kf, width=300, height=150)
+##    f2.pack()
     f3 = Frame(kf, highlightbackground="green", highlightcolor="green", highlightthickness=3,width=1000, height=1000)
     f3.pack()
     l4=Label(f3, text="Please fill in the input fields to generate the Key Generation")
@@ -155,12 +155,13 @@ def generate_keys_window():
     e2 = Entry(f1)
     e2.grid(row=2, column=6, padx=2, pady=2, sticky='w')
 
-    # logo_filepath = "img1.png"
-    # img = PhotoImage(file=logo_filepath)
-    # img = img.subsample(2,2)
-    # logo = Label(f2, image=img)
-    # logo.photo = img
-    # logo.grid(row=0, column=0, rowspan=550, columnspan=250)
+##    logo_filepath = "img1.png"
+##    img = PhotoImage(file=logo_filepath)
+##    img = img.subsample(2,2)
+##    logo = Label(f2, image=img)
+##    logo.photo = img
+##    logo.grid(row=0, column=0, rowspan=550, columnspan=550)
+    Button(f1, text="Flow diagram", background="black", foreground="white", command=lambda: create_window(f1,"rsakeygen.png", "")).place(relx=0.8,rely=0.2)
     Button(f1, text="Back", background="red", foreground="white", activebackground="black", activeforeground="white", width=12, command=close_generate_keys_window).grid(row=4, column=0, sticky='e', padx=8, pady=4)
     Button(f1, text="Generate", background="blue", foreground="white", activebackground="black", activeforeground="white", width=12, command=generate_keys).grid(row=4, column=6, sticky='e', padx=8, pady=4)
 
