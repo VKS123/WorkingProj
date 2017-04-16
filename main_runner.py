@@ -175,10 +175,6 @@ def encrypt():
         'm is the plaintext message, a (n−k0−k1)-bit string',
         '↓',
         'G and H are cryptographic hash functions fixed by the protocol.',
-<<<<<<< 6665b6fbbcb0e3cbb3495990aafbf9b406e5ed63
-        '⊕ is an xor operation.',
-=======
->>>>>>> Updated example flow chart of encryption and decryption
         '↓',
         'Messages are padded with k1 zeros to be n − k0 bits in length.',
         '↓',
@@ -196,9 +192,7 @@ def encrypt():
         '↓',
         'Represents the plaintext message as a positive integer m, 1 < m < n.',
         '↓',
-        'Computes the cipher text c = (m^e)mod n and sends it to B',
-        '↓',
-        'Sends the cipher text c to B.',
+        'Computes the cipher text c = (m^e)mod n and sends it to B'
     ]
     example = [
         'n = 10',
