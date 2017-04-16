@@ -1,3 +1,4 @@
+#-*- coding: utf-8
 import os
 from tkFileDialog import askopenfilename
 from Tkinter import *
@@ -151,9 +152,9 @@ def generate_keys_window():
     l1=Label(f1)
     l1.grid(row=3, column=4, sticky='e')
     e1 = Entry(f1)
-    e1.grid(row=1, column=4, padx=2, pady=2, sticky='e')
+    e1.grid(row=1, column=4, padx=2, pady=2, sticky='w')
     e2 = Entry(f1)
-    e2.grid(row=2, column=4, padx=2, pady=2, sticky='e')
+    e2.grid(row=2, column=4, padx=2, pady=2, sticky='w')
 
     # logo_filepath = "img1.png"
     # img = PhotoImage(file=logo_filepath)
@@ -173,7 +174,8 @@ def encrypt():
         '↓',
         'm is the plaintext message, an (n − k0 − k1 )-bit string',
         '↓',
-        'G and H are cryptographic hash functions fixed by the protocol.⊕ is an xor operation.',
+        'G and H are cryptographic hash functions fixed by the protocol.',
+        '⊕ is an xor operation.',
         '↓',
         'Messages are padded with k1 zeros to be n − k0 bits in length.',
         '↓',
@@ -220,9 +222,9 @@ def encrypt():
         l6.destroy()
         l7.destroy()
         for i in range(len(content)):
-            encrptwindow.after(i * 500, flowchart, ef3,content[i].center(50), i, 0.3)
+            encrptwindow.after(i * 500, flowchart, ef3,content[i].center(50), i, 0.3,0.03)
         for i in range(len(example)):
-            encrptwindow.after(i * 500, flowchart, ef3,example[i].center(50), i, 0.7)
+            encrptwindow.after(i * 500, flowchart, ef3,example[i].center(50), i, 0.7,0.03)
         # print entry1.get()
         # print entry2.get()
         # print entry3.get()
@@ -272,9 +274,9 @@ def decrypt():
         l8.destroy()
         l9.destroy()
         for i in range(len(content)):
-            decrptwindow.after(i * 500, flowchart, df3,content[i].center(50), i, 0.3)
+            decrptwindow.after(i * 500, flowchart, df3,content[i].center(50), i, 0.3,0.05)
         for i in range(len(example)):
-            decrptwindow.after(i * 500, flowchart, df3,example[i].center(50), i, 0.7)
+            decrptwindow.after(i * 500, flowchart, df3,example[i].center(50), i, 0.7,0.05)
         # print entry4.get()
         # print entry5.get()
         # print entry6.get()
@@ -297,10 +299,10 @@ def decrypt():
         else:
             l3.config(text="Decryption Failed")
 
-def flowchart(f,t,r,c):
+def flowchart(f,t,r,c,q):
     a=Label(f, text=t)
     # a.grid(row=r, column=0, sticky='e')
-    a.place(relx=c, rely=(r+1)*0.05, anchor=CENTER)
+    a.place(relx=c, rely=(r+1)*q, anchor=CENTER)
 
 def generate_keys():
     content=[
@@ -347,9 +349,9 @@ def generate_keys():
         l4.destroy()
         l5.destroy()
         for i in range(len(content)):
-            keywindow.after(i*500,flowchart,f3,content[i].center(50 ),i,0.3)
+            keywindow.after(i*500,flowchart,f3,content[i].center(50 ),i,0.3,0.05)
         for i in range(len(example)):
-            keywindow.after(i*500,flowchart,f3,example[i].center(50 ),i,0.7)
+            keywindow.after(i*500,flowchart,f3,example[i].center(50 ),i,0.7,0.05)
         res = makeKeyFiles('rsa', int(e1.get()))
         if len(res):
             l1.config(text=res)
