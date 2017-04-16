@@ -223,8 +223,11 @@ def encrypt():
         f=open(directory+"/extension.txt","w")
         f.write(fn.split(".")[-1])
         f.close()
-        start(directory,entry1.get(),entry2.get(),entry3.get())
-
+        flag=start(directory,entry1.get(),entry2.get(),entry3.get())
+        if flag:
+            l2.config(text="Encryption Done")
+        else:
+            l2.config(text="Encryption Failed")
 
 
 def decrypt():
@@ -287,11 +290,15 @@ def decrypt():
             os.makedirs(directory)
         zip_ref.extractall(directory)
         zip_ref.close()
-        end(directory,entry4.get(),entry5.get(),entry6.get())
-        f=open(directory+"/extension.txt","r")
-        extension=f.read()
-        f.close()
-        dec(directory+"/final_decr.txt",extension)
+        flag=end(directory,entry4.get(),entry5.get(),entry6.get())
+        if flag:
+            f=open(directory+"/extension.txt","r")
+            extension=f.read()
+            f.close()
+            dec(directory+"/final_decr.txt",extension)
+            l3.config(text="Decryption Done")
+        else:
+            l3.config(text="Decryption Failed")
 
 def flowchart(f,t,r,c):
     a=Label(f, text=t)
