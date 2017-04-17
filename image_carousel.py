@@ -1,10 +1,10 @@
-from itertools import cycle
-try:
-    # Python2
-    import Tkinter as tk
-except ImportError:
-    # Python3
-    import tkinter as tk
+# from itertools import cycle
+# try:
+#     # Python2
+#     import Tkinter as tk
+# except ImportError:
+#     # Python3
+#     import tkinter as tk
 # class App(tk.Tk):
 #     '''Tk window/label adjusts to size of image'''
 #     def __init__(self, image_files, x, y, delay):
@@ -46,26 +46,50 @@ except ImportError:
 # app = App(image_files, x, y, delay)
 # app.show_slides()
 # app.run()
+
+# ===================================================
+
 # import Tkinter as tk
 # from itertools import cycle
 
 # foreign library, need to installed
-from ImageTk import PhotoImage
+# from ImageTk import PhotoImage
+#
+# images = ["first1.jpg", "first2.jpg", "first3.jpg", "first4.jpg"]
+# photos = cycle(PhotoImage(file=image) for image in images)
+#
+# def slideShow():
+#   img = next(photos)
+#   displayCanvas.config(image=img)
+#   root.after(50, slideShow) # 0.05 seconds
+#
+# root = tk.Tk()
+# root.overrideredirect(True)
+# width = root.winfo_screenwidth()
+# height = root.winfo_screenwidth()
+# root.geometry('%dx%d' % (640, 480))
+# displayCanvas = tk.Label(root)
+# displayCanvas.pack()
+# root.after(10, lambda: slideShow())
+# root.mainloop()
 
-images = ["first1.jpg", "first2.jpg", "first3.jpg", "first4.jpg"]
-photos = cycle(PhotoImage(file=image) for image in images)
+# ===================================================
 
-def slideShow():
-  img = next(photos)
-  displayCanvas.config(image=img)
-  root.after(50, slideShow) # 0.05 seconds
+import sys
+from tkinter import * #or Tkinter if you're on Python2.7
 
-root = tk.Tk()
-root.overrideredirect(True)
-width = root.winfo_screenwidth()
-height = root.winfo_screenwidth()
-root.geometry('%dx%d' % (640, 480))
-displayCanvas = tk.Label(root)
-displayCanvas.pack()
-root.after(10, lambda: slideShow())
-root.mainloop()
+def button1():
+    novi = Toplevel()
+    canvas = Canvas(novi, width = 300, height = 200)
+    canvas.pack(expand = YES, fill = BOTH)
+    gif1 = PhotoImage(file = 'img1.png')
+                                #image not visual
+    canvas.create_image(50, 10, image = gif1, anchor = NW)
+    #assigned the gif1 to the canvas object
+    canvas.gif1 = gif1
+
+
+mGui = Tk()
+button1 = Button(mGui,text ='Next',command = button1, height=5, width=20).pack()
+
+mGui.mainloop()
