@@ -55,11 +55,15 @@ def decryption_window():
     entry6.grid(row=2, column=2, padx=2, pady=2, sticky='we', columnspan=25)
     entry8 = Entry(df1, width=50, textvariable=file_path)
     entry8.grid(row=3, column=2, padx=2, pady=2, sticky='we', columnspan=25)
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
     Button(df1, text="Browse", background="yellow", foreground="black", activebackground="black", activeforeground="white", command=lambda: open_file(entry4)).grid(row=0, column=27, sticky='ew', padx=8, pady=4)
     Button(df1, text="Browse", background="yellow", foreground="black", activebackground="black", activeforeground="white", command=lambda: open_file(entry5)).grid(row=1, column=27, sticky='ew', padx=8, pady=4)
     Button(df1, text="Browse", background="yellow", foreground="black", activebackground="black", activeforeground="white", command=lambda: open_file(entry6)).grid(row=2, column=27, sticky='ew', padx=8, pady=4)
     Button(df1, text="Browse", background="yellow", foreground="black", activebackground="black", activeforeground="white", command=lambda: open_file(entry8)).grid(row=3, column=27, sticky='ew', padx=8, pady=4)
-    Button(df1, text="Flow diagram", background="black", foreground="white", command=lambda: create_window(df1,"img2.png","img4.png")).place(relx=0.8, rely=0.2)
+    Button(df1, text="Flow diagram", background="black", foreground="white", command=lambda: create_window(df1,base_path+"/"+"img2.png",base_path+"/"+"img4.png")).place(relx=0.8, rely=0.2)
     Button(df1, text="Back", background="red", foreground="white", activebackground="black", activeforeground="white", command=close_decryption_window).grid(row=5, column=0, sticky='we', padx=8, pady=4)
     Button(df1, text="Decrypt", background="blue", foreground="white", activebackground="black", activeforeground="white", command=decrypt).grid(row=5, column=12, sticky='we', padx=8, pady=4)
 
@@ -116,11 +120,15 @@ def encryption_window():
     entry3.grid(row=2, column=2, padx=2, pady=2, sticky='we', columnspan=25)
     entry7 = Entry(ef1, width=50, textvariable=file_path)
     entry7.grid(row=3, column=2, padx=2, pady=2, sticky='we', columnspan=25)
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
     Button(ef1, text="Browse", background="yellow", foreground="black", activebackground="black", activeforeground="white", command=lambda: open_file(entry1)).grid(row=0, column=27, sticky='ew', padx=8, pady=4)
     Button(ef1, text="Browse", background="yellow", foreground="black", activebackground="black", activeforeground="white", command=lambda: open_file(entry2)).grid(row=1, column=27, sticky='ew', padx=8, pady=4)
     Button(ef1, text="Browse", background="yellow", foreground="black", activebackground="black", activeforeground="white", command=lambda: open_file(entry3)).grid(row=2, column=27, sticky='ew', padx=8, pady=4)
     Button(ef1, text="Browse", background="yellow", foreground="black", activebackground="black", activeforeground="white", command=lambda: open_file(entry7)).grid(row=3, column=27, sticky='ew', padx=8, pady=4)
-    Button(ef1, text="Flow diagram", background="black", foreground="white", command=lambda: create_window(ef1,"img2.png","img3.png")).place(relx=0.8,rely=0.2)
+    Button(ef1, text="Flow diagram", background="black", foreground="white", command=lambda: create_window(ef1,base_path+"/"+"img2.png",base_path+"/"+"img3.png")).place(relx=0.8,rely=0.2)
     Button(ef1, text="Back", background="red", foreground="white", activebackground="black", activeforeground="white", command=close_encryption_window).grid(row=5, column=0, sticky='we', padx=8, pady=4)
     Button(ef1, text="Encrypt", background="blue", foreground="white", activebackground="black", activeforeground="white", command=encrypt).grid(row=5, column=12, sticky='we', padx=8, pady=4)
 
@@ -154,14 +162,17 @@ def generate_keys_window():
     e1.grid(row=1, column=6, padx=2, pady=2, sticky='w')
     e2 = Entry(f1)
     e2.grid(row=2, column=6, padx=2, pady=2, sticky='w')
-
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
 ##    logo_filepath = "img1.png"
 ##    img = PhotoImage(file=logo_filepath)
 ##    img = img.subsample(2,2)
 ##    logo = Label(f2, image=img)
 ##    logo.photo = img
 ##    logo.grid(row=0, column=0, rowspan=550, columnspan=550)
-    Button(f1, text="Flow diagram", background="black", foreground="white", command=lambda: create_window(f1,"rsakeygen.png", "")).place(relx=0.8,rely=0.2)
+    Button(f1, text="Flow diagram", background="black", foreground="white", command=lambda: create_window(f1,base_path+"/"+"rsakeygen.png", "")).place(relx=0.8,rely=0.2)
     Button(f1, text="Back", background="red", foreground="white", activebackground="black", activeforeground="white", width=12, command=close_generate_keys_window).grid(row=4, column=0, sticky='e', padx=8, pady=4)
     Button(f1, text="Generate", background="blue", foreground="white", activebackground="black", activeforeground="white", width=12, command=generate_keys).grid(row=4, column=6, sticky='e', padx=8, pady=4)
 
